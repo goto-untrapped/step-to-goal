@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.home {
+  background-image: linear-gradient(to top, #a2d8f0, #9ad4ef, #91d1ed, #89cdec,
+     #80c9eb, #88ccec, #90ceed, #97d1ee, 
+     #afdbf2, #c6e4f6, #dbeef9, #f0f8fd);
+     /* background-image: linear-gradient(to bottom, #a2d8f0, #9ad4ef, #91d1ed, #89cdec, */
+      /* #80c9eb, #88ccec, #90ceed, #97d1ee, 
+      #afdbf2, #c6e4f6, #dbeef9, #f0f8fd); */
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.homeLeftArea, .homeRightArea {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5rem;
+}
+
+.homeLeftIconArea:hover, .homeRightIconArea:hover, .addTodoButton:hover, .registerButton:hover {
+  background: #FFCC66;
+}
+
+.homeCenterArea {
+  box-shadow: 0px 0px 10px #FFFF66;
+  border: 0.1rem solid #CAEEFB;
+  width: 60%;
+}
+
+.homeLeftIconArea, .homeRightIconArea {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #FFFF66;
+  border: 0.25rem solid #CAEEFB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.editIcon, .addIcon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.targetCard {
+  background-color: #F2F2F2;
+  border: 0.1rem solid #CAEEFB;
+  box-shadow: 5px 5px .5em #163E64;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.registerModal, .cardListModal, .EditCardModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  background-color: #F2F2F2;
+  border: 0.1rem solid #CAEEFB;
+  box-shadow: 5px 5px .5em #163E64;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+};
+
+.targetAreaModal {
+  padding: 2rem;
+}
+
+.registerModalTitle, .cardListModalTitle, .EditCardModalTitle {
+  display: flex;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.targetAreaModal {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+.todoAreaModal {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 9rem;
+}
+
+.cardListArea {
+  overflow: auto;
+  max-height: 25rem;
+}
+
+.targetTitle, .todoTitle {
+  margin-bottom: 0.5rem;
+}
+
+.targetContent {
+  margin: 0.5rem;
+  margin-bottom: 0.75rem;
+  width: 20rem;
+}
+
+.todoContent {
+  margin-left: 0.5rem;
+  width: 20rem;
+}
+
+.targetContentModal, .todoContentModal {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 20rem;
+}
+
+.addTodoButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  background-color: #FFFF66;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.registerButton {
+  display: flex;
+  justify-content: center;
+  background-color: #FFFF66;
+  width: 25%;
+  margin: 2rem;
+  padding: 0.5rem;
+  border-radius: 10%;
+  border: 0.25rem solid #CAEEFB;
+  font-weight: 600;
+  cursor: pointer;
+}
