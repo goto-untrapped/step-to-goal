@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import TargetCard from '../TargetCard/TargetCard';
 import RegisterModal from '../Register/RegisterModal';
 import CardListModal from '../Edit/CardListModal';
+import LoginModal from '../Login/LoginModal';
 
 const HomePage = () => {
     const [openRegisterModal, setOpenRegisterModal] = React.useState(false);
@@ -37,6 +38,9 @@ const HomePage = () => {
                 </div>
             </div>
 
+            <section>
+                <LoginModal open={true} handleClose={false}/>
+            </section>
             <section>
                 <CardListModal open={openCardListModal} handleClose={handleCloseCardListModal}/>
             </section>
