@@ -29,9 +29,12 @@ export default function CardListModal({ handleClose, open }) {
           <div class="cardListArea">
             <div 
             onClick={handleOpenEditCardModal}>
+                {/* <CardListTargetCard style={styles.cardListCard} />
                 <CardListTargetCard style={styles.cardListCard} />
-                <CardListTargetCard style={styles.cardListCard} />
-                <CardListTargetCard style={styles.cardListCard} />
+                <CardListTargetCard style={styles.cardListCard} /> */}
+                <CardListTargetCard />
+                <CardListTargetCard />
+                <CardListTargetCard />
             </div>
           </div>
 

@@ -1,0 +1,157 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\sasih\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @babel/preset-react babel-loader --dev
+
+PATH: 
+  C:\Program Files (x86)\VMware\VMware Player\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-17.0.3.1\bin;C:\pleiades\java\17\bin;C:\Program Files\Git\cmd;C:\Program Files\Calibre2\;C:\Program Files (x86)\Vim\vim90;C:\Users\sasih\.fly\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\qemu;C:\Users\sasih\.cargo\bin;C:\Users\sasih\AppData\Local\Microsoft\WindowsApps;C:\Users\sasih\AppData\Local\Programs\Microsoft VS Code\bin;C:\src\flutter\bin;C:\Users\sasih\.dotnet\tools;C:\Users\sasih\.fly\bin;C:\Users\sasih\AppData\Roaming\npm;"C:\src\flutter\bin"
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.18.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, copyfile 'C:\Users\sasih\AppData\Local\Yarn\Cache\v6\npm-@pmmmwh-react-refresh-webpack-plugin-0.5.11-7c2268cedaa0644d677e8c4f377bc8fb304f714a-integrity\node_modules\@pmmmwh\react-refresh-webpack-plugin\package.json' -> 'C:\Users\sasih\Desktop\Dev\step-to-goal\node_modules\@pmmmwh\react-refresh-webpack-plugin\package.json'
+
+npm manifest: 
+  {
+  
+  
+    "name": "step-to-goal",
+    "proxy": "http://127.0.0.1:8000",
+    "version": "0.1.0",
+  
+  
+    "private": true,
+  
+  
+    "dependencies": {
+  
+  
+      "@emotion/react": "^11.11.4",
+  
+  
+      "@emotion/styled": "^11.11.0",
+  
+  
+      "@mui/icons-material": "^5.15.12",
+  
+  
+      "@mui/lab": "^5.0.0-alpha.169",
+  
+  
+      "@mui/material": "^5.15.12",
+  
+  
+      "@testing-library/jest-dom": "^5.17.0",
+  
+  
+      "@testing-library/react": "^13.4.0",
+  
+  
+      "@testing-library/user-event": "^13.5.0",
+  
+  
+      "react": "^18.2.0",
+  
+  
+      "react-dom": "^18.2.0",
+  
+  
+      "react-router-dom": "^6.22.3",
+  
+  
+      "react-scripts": "5.0.1",
+  
+  
+      "sqlite": "^5.1.1",
+  
+  
+      "web-vitals": "^2.1.4"
+  
+  
+    },
+  
+  
+    "scripts": {
+  
+  
+      "start": "react-scripts start",
+  
+  
+      "build": "react-scripts build",
+  
+  
+      "test": "react-scripts test",
+  
+  
+      "eject": "react-scripts eject"
+  
+  
+    },
+  
+  
+    "eslintConfig": {
+  
+  
+      "extends": [
+  
+  
+        "react-app",
+  
+  
+        "react-app/jest"
+  
+  
+      ]
+  
+  
+    },
+  
+  
+    "browserslist": {
+  
+  
+      "production": [
+  
+  
+        ">0.2%",
+  
+  
+        "not dead",
+  
+  
+        "not op_mini all"
+  
+  
+      ],
+  
+  
+      "development": [
+  
+  
+        "last 1 chrome version",
+  
+  
+        "last 1 firefox version",
+  
+  
+        "last 1 safari version"
+  
+  
+      ]
+  
+  
+    }
+  
+  
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html>
-    <head lang="ja">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Step to Goal</title>
-    </head>
-    <body>
-        <h1>あなたの理想を入力してください</h1>
-    </body>
-    <form method="post">            <!--ここらへんよく分かってないけどうまくいった-->
-        {% csrf_token %}            <!--これを入れないとエラーが出る-->
-        {{ form.as_p }}
-        <button type="submit">OK</button>
-    </form>
-    
 
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/javascript" src="../static/js/bundle.js"></script>
+</body>
 </html>
