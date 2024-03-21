@@ -12,6 +12,14 @@
     <form method="post">            <!--ここらへんよく分かってないけどうまくいった-->
         {% csrf_token %}            <!--これを入れないとエラーが出る-->
         {{ form.as_p }}
+        <!-- <div>
+            <label for="id_name">名前:</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="id_content">あなたの理想:</label>
+            {{ form.content }}
+        </div> -->
         <button type="submit">OK</button>
     </form>
     
