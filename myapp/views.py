@@ -1,4 +1,5 @@
 from imaplib import _Authenticator
+import json
 import sqlite3
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -103,14 +104,6 @@ def login_view(request):
         # ユーザーが存在しない場合の処理
         return JsonResponse({'message': 'User does not exist'}, status=400)
 
-    # if user is not None:
-    #     # ユーザーが存在する場合の処理
-    #     return Response({'message': 'Login successful'})
-    # else:
-    #     # ユーザーが存在しない場合の処理
-    #     return Response({'message': 'Invalid credentials'}, status=400)
-	
-
 def CsrfView(request):
     return JsonResponse({'token': get_token(request)})
 
@@ -148,3 +141,23 @@ def targetView(request):
 
 	print("backend:", len(target_data))
 	return JsonResponse({'targets': target_data})
+
+
+numbering_target_id = 0
+numbering_todo_id = 0
+def registerView(request):
+	data = json.loads(request.body)
+	content = data["target"]
+	todos = data["todos"]
+	global numbering_target_id
+	global numbering_todo_id
+	# データベースに保存する処理
+	TestTarget.objects.create(target_id = numbering_target_id, user_id='U001', content=content)
+
+	for todo in todos:
+		if todo:
+			TestTodo.objects.create(todo_id=numbering_todo_id ,target_id=numbering_target_id, content=todo["text"])
+			numbering_todo_id += 1
+	numbering_target_id += 1
+	return JsonResponse({'message': 'success'})
+

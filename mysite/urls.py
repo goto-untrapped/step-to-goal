@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from myapp.views import CsrfView, PingView, targetView
+from myapp.views import CsrfView, PingView, registerView, targetView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('csrf/', CsrfView),
     path('ping/', PingView),
     path('api/target', targetView),
+    path('api/save/', registerView),
 ]
