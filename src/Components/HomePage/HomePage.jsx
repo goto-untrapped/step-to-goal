@@ -5,6 +5,7 @@ import TargetCard from '../TargetCard/TargetCard';
 import RegisterModal from '../Register/RegisterModal';
 import CardListModal from '../Edit/CardListModal';
 
+
 const HomePage = () => {
     const [openRegisterModal, setOpenRegisterModal] = React.useState(false);
     const handleOpenRegisterModal = () => setOpenRegisterModal(true);

@@ -18,3 +18,5 @@ const CardListTargetCard = ({style}) => {
 }
 
 export default CardListTargetCard
+
+//目標・TODOリストを画面上に表示
