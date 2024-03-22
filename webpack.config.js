@@ -5,8 +5,9 @@ module.exports = {
     entry: './src/index.js',　//buildするファイル
     output: {
         filename: 'bundle.js',　//build後のファイル名
-        path: path.join(__dirname, '../step-to-goal/myapp/static/js') //buildファイルが作成される場所
-    },
+        path: path.join(__dirname, '../step-to-goal/myapp/static/js'), //buildファイルが作成される場所
+        publicPath: '/js/',
+      },
     module: {
         rules: [
           {

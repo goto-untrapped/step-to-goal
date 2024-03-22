@@ -6,7 +6,7 @@ from django.http.response import HttpResponseNotAllowed
 from django.shortcuts import render,redirect
 from django.template.context_processors import debug, request
 from .forms import GoalForm
-from .models import Goal
+from .models import Goal, TestTarget, TestTodo, User0322
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -73,35 +73,35 @@ def update(request):
 		
 @api_view(['POST'])
 def login_view(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    # user = authenticate(username=username, password=password)
+    # username = request.data.get('username')
+    # password = request.data.get('password')
+    # # user = authenticate(username=username, password=password)
 	
-    dbFile = 'myapp_user.db'
-    con = sqlite3.connect(dbFile)
-    cur = con.cursor()
-    cur.execute('SELECT * FROM myapp_user')
-    for row in cur:
-        if row[username] == username:
-            return JsonResponse({'message': 'Login successful'})
-    return JsonResponse({'message': 'User does not exist'}, status=400)
+    # dbFile = 'myapp_user.db'
+    # con = sqlite3.connect(dbFile)
+    # cur = con.cursor()
+    # cur.execute('SELECT * FROM myapp_user')
+    # for row in cur:
+    #     if row[username] == username:
+    #         return JsonResponse({'message': 'Login successful'})
+    # return JsonResponse({'message': 'User does not exist'}, status=400)
 
-    # try:
-    #     # ユーザーを検索して認証する
-    #     user = User.objects.get(username=username)
-    #     print(user.username)
-    #     if user:
-    #         return JsonResponse({'message': 'Login successful'})
-	# 	# if user.check_password(password):
-	# 	# if user:
-    #         # パスワードが一致した場合の処理
-    #         return JsonResponse({'message': 'Login successful'})
-    #     else:
-    #         # パスワードが一致しない場合の処理
-    #         return JsonResponse({'message': 'Invalid credentials'}, status=400)
-    # except User.DoesNotExist:
-    #     # ユーザーが存在しない場合の処理
-    #     return JsonResponse({'message': 'User does not exist'}, status=400)
+    try:
+        # ユーザーを検索して認証する
+        user = User0322.objects.get(username=username)
+        print(user.username)
+        if user:
+            return JsonResponse({'message': 'Login successful'})
+		# if user.check_password(password):
+		# if user:
+            # パスワードが一致した場合の処理
+            return JsonResponse({'message': 'Login successful'})
+        else:
+            # パスワードが一致しない場合の処理
+            return JsonResponse({'message': 'Invalid credentials'}, status=400)
+    except User.DoesNotExist:
+        # ユーザーが存在しない場合の処理
+        return JsonResponse({'message': 'User does not exist'}, status=400)
 
     # if user is not None:
     #     # ユーザーが存在する場合の処理
@@ -116,3 +116,35 @@ def CsrfView(request):
 
 def PingView(request):
     return JsonResponse({'result': True})
+
+def targetView(request):
+	targets = TestTarget.objects.all()
+	target_todo_dict = {}
+	for target in targets:
+		target_todo_dict[target.target_id] = []
+	
+	todos = TestTodo.objects.all()
+	for target in targets:
+		for todo in todos:
+			if target.target_id == todo.target_id:
+				target_todo_dict[target.target_id].append(todo)
+				continue	
+
+	target_data = []
+	for target in targets:
+		target_dict = {
+            'target_id': target.target_id,
+            'user_id': target.user_id,
+            'content': target.content,
+			'todos': [
+				{
+					'todo_id': todo.todo_id,
+					'content': todo.content,
+				}
+				for todo in target_todo_dict[target.target_id]
+			]
+        }
+		target_data.append(target_dict)
+
+	print("backend:", len(target_data))
+	return JsonResponse({'targets': target_data})
