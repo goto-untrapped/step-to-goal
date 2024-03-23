@@ -6,3 +6,6 @@ admin.site.register(TestTarget)
 
 from myapp.models import TestTodo
 admin.site.register(TestTodo)
+
+from myapp.models import User
+admin.site.register(User)

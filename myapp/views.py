@@ -7,7 +7,7 @@ from django.http.response import HttpResponseNotAllowed
 from django.shortcuts import render,redirect
 from django.template.context_processors import debug, request
 from .forms import GoalForm
-from .models import Goal, TestTarget, TestTodo, User0322
+from .models import Goal, TestTarget, TestTodo
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -71,38 +71,30 @@ def update(request):
 			description = form.cleaned_data['description']
 			goal = Goal.objects.create(subject=subject, description=description)
 			return redirect(goal_data)
-		
-@api_view(['POST'])
-def login_view(request):
-    # username = request.data.get('username')
-    # password = request.data.get('password')
-    # # user = authenticate(username=username, password=password)
-	
-    # dbFile = 'myapp_user.db'
-    # con = sqlite3.connect(dbFile)
-    # cur = con.cursor()
-    # cur.execute('SELECT * FROM myapp_user')
-    # for row in cur:
-    #     if row[username] == username:
-    #         return JsonResponse({'message': 'Login successful'})
-    # return JsonResponse({'message': 'User does not exist'}, status=400)
 
-    try:
-        # ユーザーを検索して認証する
-        user = User0322.objects.get(username=username)
-        print(user.username)
-        if user:
-            return JsonResponse({'message': 'Login successful'})
-		# if user.check_password(password):
-		# if user:
-            # パスワードが一致した場合の処理
-            return JsonResponse({'message': 'Login successful'})
-        else:
-            # パスワードが一致しない場合の処理
-            return JsonResponse({'message': 'Invalid credentials'}, status=400)
-    except User.DoesNotExist:
-        # ユーザーが存在しない場合の処理
-        return JsonResponse({'message': 'User does not exist'}, status=400)
+def userSaveView(request):
+	data = json.loads(request.body)
+	username = data["username"]
+	password = data["password"]
+	global numbering_user_id
+	# データベースに保存する処理
+	User.objects.create(username=username, password=password)
+
+	return JsonResponse({'message': 'success'})
+
+def loginView(request):
+	data = json.loads(request.body)
+	username = data["username"]
+	password = data["password"]
+	try:
+		user = User.objects.get(username=username)
+		if user:
+			if password == user.password:
+				return JsonResponse({'message': 'Login successful'})
+			else:
+				return JsonResponse({'message': 'Wrong password'}, status=400)
+	except:
+		return JsonResponse({'message': 'User does not exist'}, status=400)
 
 def CsrfView(request):
     return JsonResponse({'token': get_token(request)})
@@ -139,7 +131,50 @@ def targetView(request):
         }
 		target_data.append(target_dict)
 
-	print("backend:", len(target_data))
+	return JsonResponse({'targets': target_data})
+
+def myTargetView(request):
+	# params = json.loads(request.body)
+	# username = params.get('username', None)
+	username = ''
+	print(request)
+	print(request.GET)
+	if 'username' in request.GET:
+		print('in')
+		username = request.GET.get('username')
+	print(username)
+
+	targets = TestTarget.objects.filter(user_id=username)
+	# targets = TestTarget.objects.all()
+	# target_todo_dict = {}
+	# for target in targets:
+	# 	target_todo_dict[target.target_id] = []
+	
+	# todos = TestTodo.objects.all()
+	# for target in targets:
+	# 	for todo in todos:
+	# 		if target.target_id == todo.target_id:
+	# 			target_todo_dict[target.target_id].append(todo)
+	# 			continue
+
+	target_data = []
+	for target in targets:
+		target_dict = {
+            'target_id': target.target_id,
+            'user_id': target.user_id,
+            'content': target.content,
+			'todos': [
+				{
+					# 'todo_id': todo.todo_id,
+					'todo_id': "a",
+					# 'content': todo.content,
+					'content': "b",
+				}
+				# for todo in target_todo_dict[target.target_id]
+			]
+        }
+		target_data.append(target_dict)
+
 	return JsonResponse({'targets': target_data})
 
 
@@ -159,5 +194,15 @@ def registerView(request):
 			TestTodo.objects.create(todo_id=numbering_todo_id ,target_id=numbering_target_id, content=todo["text"])
 			numbering_todo_id += 1
 	numbering_target_id += 1
+	return JsonResponse({'message': 'success'})
+
+numbering_user_id = 0
+def registerView(request):
+	data = json.loads(request.body)
+	content = data["target"]
+	global numbering_user_id
+	# データベースに保存する処理
+	TestTarget.objects.create(target_id = numbering_target_id, user_id='U001', content=content)
+
 	return JsonResponse({'message': 'success'})
 

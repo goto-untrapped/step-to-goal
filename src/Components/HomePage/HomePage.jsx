@@ -8,6 +8,10 @@ import LoginModal from '../Login/LoginModal';
 import axios from 'axios';
 
 const HomePage = () => {
+    const [openLoginModal, setOpenLoginModal] = React.useState(true);
+    const handleOpenLoginModal = () => setOpenLoginModal(true);
+    const handleCloseLoginModal = () => setOpenLoginModal(false);
+
     const [openRegisterModal, setOpenRegisterModal] = React.useState(false);
     const handleOpenRegisterModal = () => setOpenRegisterModal(true);
     const handleCloseRegisterModal = () => setOpenRegisterModal(false);
@@ -35,8 +39,6 @@ const HomePage = () => {
       fetchData();
     }, []); // 最初のレンダリング時にのみ実行される
   
-    console.log("targets size: " + targets.length)
-
     return (
         <div class="home">
             <div class="homeLeftArea">
@@ -61,7 +63,7 @@ const HomePage = () => {
             </div>
 
             <section>
-                {/* <LoginModal open={false} handleClose={false}/> */}
+                <LoginModal open={openLoginModal} handleClose={handleCloseLoginModal}/>
             </section>
             <section>
                 <CardListModal open={openCardListModal} handleClose={handleCloseCardListModal}/>

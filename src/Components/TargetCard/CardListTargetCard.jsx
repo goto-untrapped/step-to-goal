@@ -9,7 +9,14 @@ const CardListTargetCard = ({ style }) => {
     const fetchData = async () => {
       try {
         // Pythonのバックエンドからデータを取得
-        const targetResponse = await axios.get("/api/target");
+        const targetResponse = await axios.get("/api/target/mytarget"
+        ,{
+          params: {
+            username: localStorage.getItem("username"),
+            // username: 'test',
+          }
+        }
+        );
         // 取得したデータを状態に設定
         setTargets(targetResponse.data.targets);
       } catch (error) {

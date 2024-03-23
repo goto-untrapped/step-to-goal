@@ -6,8 +6,8 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { useState } from "react";
 
 export default function LoginModal({ handleClose, open }) {
-  const API_HOST = 'http://localhost:8000';
-  const SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS', 'TRACE']; // RFC7231
+  const API_HOST = "http://localhost:8000";
+  const SAFE_METHODS = ["GET", "HEAD", "OPTIONS", "TRACE"]; // RFC7231
   const [csrfFlag, setCsrfFlag] = useState(false);
 
   const [tabValue, setTabValue] = useState("1");
@@ -18,38 +18,60 @@ export default function LoginModal({ handleClose, open }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmitUserSave = async (e) => {
     e.preventDefault();
-    const response = await fetch("/myapp/login/", {
+    const response = await fetch("/api/user/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'X-CSRFToken' : (await fetchCsrfToken()).token,
-        "Access-Control-Allow-Origin" : "http://localhost:8000",
-        "Access-Control-Allow-Headers" : "Content-Type"
+        "X-CSRFToken": (await fetchCsrfToken()).token,
+        "Access-Control-Allow-Origin": "http://localhost:8000",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
     if (response.status === 200) {
+      alert("Register successful");
+    } else {
+      alert(data.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": (await fetchCsrfToken()).token,
+        "Access-Control-Allow-Origin": "http://localhost:8000",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      localStorage.setItem("username", username)
       alert("Login successful");
+      handleClose();
     } else {
       alert(data.message);
     }
   };
 
   const fetchCsrfToken = async () => {
-    try { 
+    try {
       const response = await fetch(`${API_HOST}/csrf/`, {
-        credentials: 'include'
+        credentials: "include",
       });
       return response.json();
-    }
-    catch(e) {
+    } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   return (
     <div>
@@ -69,23 +91,29 @@ export default function LoginModal({ handleClose, open }) {
               <Tab label="ログイン" value="2" />
             </TabList>
             <TabPanel class="loginTab" value="1">
-              <div class="loginErrorMessage"></div>
-              <input
-                type="form"
-                class="newUserRegisterContent"
-                placeholder="ユーザー名"
-              />
-              <input
-                type="form"
-                class="newUserRegisterContent"
-                placeholder="パスワード"
-              />
-              <input
-                type="form"
-                class="newUserRegisterContent"
-                placeholder="表示名"
-              />
-              <div class="newUserRegisterButton">登録</div>
+              <form onSubmit={handleSubmitUserSave}>
+                <div class="loginErrorMessage"></div>
+                <input
+                  type="form"
+                  class="newUserRegisterContent"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="ユーザー名"
+                />
+                <input
+                  type="form"
+                  class="newUserRegisterContent"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="パスワード"
+                />
+                <input
+                  type="form"
+                  class="newUserRegisterContent"
+                  placeholder="表示名"
+                />
+                <button class="newUserRegisterButton">登録</button>
+              </form>
             </TabPanel>
             <TabPanel class="loginTab" value="2">
               <form onSubmit={handleSubmit}>
