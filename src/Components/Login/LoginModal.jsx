@@ -91,7 +91,7 @@ export default function LoginModal({ handleClose, open }) {
               <Tab label="ログイン" value="2" />
             </TabList>
             <TabPanel class="loginTab" value="1">
-              <form onSubmit={handleSubmitUserSave}>
+              <form onSubmit={handleSubmitUserSave} class="loginTabForm">
                 <div class="loginErrorMessage"></div>
                 <input
                   type="form"
@@ -116,7 +116,7 @@ export default function LoginModal({ handleClose, open }) {
               </form>
             </TabPanel>
             <TabPanel class="loginTab" value="2">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} class="loginTabForm">
                 <input
                   type="text"
                   class="newUserRegisterContent"

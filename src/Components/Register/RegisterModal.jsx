@@ -49,6 +49,7 @@ export default function RegisterModal({ handleClose, open }) {
           target: target,
           // todos: JSON.stringify({ todos }),
           todos: todos,
+          username: localStorage.getItem('username'),
         },
         {
           headers: {

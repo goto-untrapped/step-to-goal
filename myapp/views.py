@@ -184,10 +184,11 @@ def registerView(request):
 	data = json.loads(request.body)
 	content = data["target"]
 	todos = data["todos"]
+	username=data["username"]
 	global numbering_target_id
 	global numbering_todo_id
 	# データベースに保存する処理
-	TestTarget.objects.create(target_id = numbering_target_id, user_id='U001', content=content)
+	TestTarget.objects.create(target_id = numbering_target_id, user_id=username, content=content)
 
 	for todo in todos:
 		if todo:
