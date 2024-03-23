@@ -196,13 +196,3 @@ def registerView(request):
 	numbering_target_id += 1
 	return JsonResponse({'message': 'success'})
 
-numbering_user_id = 0
-def registerView(request):
-	data = json.loads(request.body)
-	content = data["target"]
-	global numbering_user_id
-	# データベースに保存する処理
-	TestTarget.objects.create(target_id = numbering_target_id, user_id='U001', content=content)
-
-	return JsonResponse({'message': 'success'})
-
